@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Welcome to amigoChat</title>
+
+    <!-- Bootstrap
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">-->
+    <LINK REL=StyleSheet HREF="CSS/style.css" TYPE="text/css">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <!--<body style="background:#eee;">-->
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="\">
+            <img alt="Brand" src="assets\images\logo.png" height="30px">
+          </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <!--<li><a href="/logout">Logout</a></li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sigin in/Sign up <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Sign in</a></li>
+            <li><a href="#">Sign up</a></li>
+            </ul>
+            </li>-->
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- body -->
+
+    <!-- Nick Name -->
+    <div class="nickNameWrap" id="nickNameWrapId">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+          <div class="bgimage-inside"></div>
+          <div class="text-center">
+            <h1 >Welcome to amigoChat</h1>
+            <p id="NickError"></p>
+            <form id="nickNameForm" class="form-inline">
+                <!--<input type="text" name="nickname" id="nickNameId" required="true" class="form-control" autocomplete="off"   placeholder="Enter Nick Name">-->
+                <div id="nickNameDiv" class="form-group">
+                  <label id="nickErrorMessage" class="control-label" for="nickNameId">That NickName already in use</label>
+                  <input type="text" name="nickname" class="form-control"  required="true"  id="nickNameId" autocomplete="off"   placeholder="Enter Nick Name">
+                </div>
+              <hr>
+              <input type="submit" class="btn btn-primary btn-lg" value="Chatroom"/>
+            </form>
+            <!--<a class="btn btn-primary btn-lg" href="/chatroom">Chatroom</a>-->
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ChatWrap" id="ChatWrapId">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-9">
+            <div class="panel panel-primary panelDisplay">
+            <div class="panel-heading">
+                <span id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span> &nbsp;
+                <label class="panel-title" for="currentUserName"></label>
+            </div>
+            <input type="hidden" id="nickName" class="form-control" placeholder="Enter your Nick Name">
+            <div class="panel-body">
+              <div id="messageDisplayBox" class="messageDisplayArea">
+                <ul id="messages" class="list-unstyled"></ul>
+              </div>
+              <!--<div class="panel-footer"><button class="btn btn-default btn-block">Button</button></div>-->
+              </div>
+              <div id="formDiv" class="">
+              <form id="theform" >
+                <input type="textarea" placeholder="Type Your message" class="form-control" id="m" autocomplete="off" />
+              </form>
+            </div>
+          </div>
+        </div>
+          <div class="col-xs-6 col-md-3">
+            <div class="panel panel-primary userList panelDisplay">
+              <div class="panel-heading">
+                  <span id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span> &nbsp;
+                  <label for="userCount"></label>
+              </div>
+              <div class="panel-body panelbodyDisplay">
+                <div id="UserListId" >
+                  <ul  id="userListULId" class="list-group"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!--  Chat messages Emit Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
