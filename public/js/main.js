@@ -1,17 +1,26 @@
 jQuery(function($){
   var socket = io();
 
-  $("#ChatWrapId").addClass('hideDiv');
-  $("#nickErrorMessage").addClass('hideDiv');
+  $( document ).ready(function() {
+    $("#nickNameId").focus();
+    $("#nickErrorMessage").hide();
+    $("#ChatWrapId").hide();
+  });
 
   $('#theform').submit(function(){
-    socket.emit('chat message', $('#nickNameId').val() +':' +$('#m').val());
-    $('#m').val('');
+    if($('#chatMessage').val() != ''){
+      socket.emit('chat message', $('#nickNameId').val(),$('#chatMessage').val());
+      $('#chatMessage').val('');
+    }
     return false;
   });
 
-  socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
+  socket.on('chat message', function(username,msg){    
+    if(username === $('#nickNameId').val()){
+      $('#messages').append($('<div class="bubble bubble-alt white">').text(username +' : '+ msg));
+    }else{
+      $('#messages').append($('<div class="bubble green">').text(username +' : '+ msg));
+    }
   });
 
   socket.on('updateUserCount', function(msg){
@@ -23,19 +32,19 @@ jQuery(function($){
     //event.preventDefault();
     socket.emit('add user',$('#nickNameId').val(),function(data){
       if(data){
-        $("#nickNameWrapId").addClass('hideDiv');
-        $("#ChatWrapId").removeClass('hideDiv');
+        $("#ChatWrapId").show();
+        $("#nickNameWrapId").hide();
         $("label[for='currentUserName']").text($('#nickNameId').val());
+        $('#chatMessage').focus();
       }else{
         $("#NickError").html('');
         $("#nickNameDiv").addClass('has-error');
-        $("#nickErrorMessage").removeClass('hideDiv');
+        $("#nickErrorMessage").show();
       }
     });
     $('#nickName').val('');
     return false;
   });
-
 
   socket.on('nickNames', function(nickNames){
     var userList = []
@@ -44,7 +53,6 @@ jQuery(function($){
       if(nickNames[i] != $('#nickNameId').val()){
         userList.push('<a href="#" class="list-group-item glyphicon glyphicon-user">  '+ nickNames[i]+'</a>');
       }
-
     }
     $( "#userListULId" ).empty();
     $('#userListULId').append( userList.join('') );

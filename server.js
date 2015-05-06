@@ -136,15 +136,15 @@ var SampleApp = function() {
     self.start = function() {
         //  Start the app on the specific interface (and port).
         http.listen(self.port, function() {
-            console.log('%s: Node server started on %s:%d ...',
+            console.log('Node server started on %s:%d ...',
                         Date(Date.now() ), self.port);
         });
 
         io.on('connection', function(socket){
 
-          socket.on('chat message', function(msg){
+          socket.on('chat message', function(userName, msg){
              console.log('message: ' + msg);
-        	   io.emit('chat message', msg);
+        	   io.emit('chat message', userName, msg);
           });
 
           socket.on('add user', function(nickName, callback){
@@ -163,12 +163,11 @@ var SampleApp = function() {
           function updateNickNames(){
             io.emit('nickNames',nickNames);
           }
+
           socket.on('disconnect', function () {
             if(!socket.nickName) return;
             nickNames.splice(nickNames.indexOf(socket.nickName),1);
             updateNickNames();
-            // remove the username from global usernames list
-            //io.sockets.emit('updateUserCount', numUsers);
           });
 
         });
