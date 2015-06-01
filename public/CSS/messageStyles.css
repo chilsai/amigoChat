@@ -1,4 +1,3 @@
-/** ios1-ios6 bubbles **/
 .bubble {
   box-sizing: border-box;
   float: left;
@@ -6,8 +5,8 @@
   max-width: 80%;
   position: relative;
   clear: both;
-  margin-left:10px;
   background: #95c2fd;
+  margin-left: 5px;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.15, #bee2ff), color-stop(1, #95c2fd));
   background-image: -webkit-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
   background-image: -moz-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
@@ -45,6 +44,7 @@
   left: -7px;
   z-index: -2;
 }
+
 .bubble:after {
   border: 8px solid transparent;
   border-bottom-color: #bee2ff; /* arrow color */
@@ -52,24 +52,22 @@
   left: -5px;
 }
 
-
 .bubble-alt {
   float: right;
-  margin-right:10px;
 }
+
 .bubble-alt:before {
   left: auto;
   right: -7px;
 }
+
 .bubble-alt:after {
   left: auto;
   right: -5px;
 }
-
 .bubble p {
   font-size: 1.4em;
 }
-
 /* green bubble */
 .green {
   background: #7acd47;

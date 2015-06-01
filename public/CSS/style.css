@@ -9,6 +9,12 @@
   margin-right: auto
 }
 
+.messages {
+  height: 100%;
+  margin: 0;
+  padding: 10px 20px 10px 20px;
+}
+
 .alignFormBottom {
   margin-bottom:100;
 }

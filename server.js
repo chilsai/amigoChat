@@ -128,6 +128,7 @@ var SampleApp = function() {
     // Open Home Page
     app.get('/', function(req, res){
       res.render('index.html');
+      //res.render('side.html');
     });
 
     /**
@@ -142,9 +143,11 @@ var SampleApp = function() {
 
         io.on('connection', function(socket){
 
+          console.log('sockets: ' + socket.id);
           socket.on('chat message', function(userName, msg){
              console.log('message: ' + msg);
-        	   io.emit('chat message', userName, msg);
+             io.emit('chat message', socket.nickName, msg);
+             //socket.broadcast.to(nickNames['sagar']).emit('chat message', socket.nickName, msg);
           });
 
           socket.on('add user', function(nickName, callback){
@@ -155,7 +158,8 @@ var SampleApp = function() {
                callback(true);
                socket.nickName = nickName;
                nickNames.push(socket.nickName);
-               console.log('Nick Names list: ' + nickNames);
+               nickNames[nickName] = socket.id;
+               console.log('Nick Names list: ' + nickNames['sagare']);
                updateNickNames();
              }
           });
@@ -168,6 +172,18 @@ var SampleApp = function() {
             if(!socket.nickName) return;
             nickNames.splice(nickNames.indexOf(socket.nickName),1);
             updateNickNames();
+          });
+
+
+          // when the client emits 'typing', we broadcast it to others
+          socket.on('typing', function (data) {
+              console.log('ssss ' + data);
+              socket.broadcast.emit('typing', data);
+          });
+
+          socket.on('stop typing', function (data) {
+            socket.broadcast.emit('stop typing',data);
+            console.log('aaaa ' + data);
           });
 
         });
