@@ -1,3 +1,7 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+Amigo Chat
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+For Demo Use below link
+
+http://amigochat.herokuapp.com
+
+Please give me feedback once you go through the Application
